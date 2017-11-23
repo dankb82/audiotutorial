@@ -11,5 +11,40 @@
 <script src="https://soulwire.github.io/sketch.js/js/sketch.min.js"></script>
 <script src="app.js"></script>
 <script type="text/babel">
-  // React code goes here.
+  const PlayButton = (props) => {
+    const className = props.isMusicPlaying ? 'play active' : 'play';
+    return <a onClick={props.onClick} href="#" title="Play Video" className={className} />;
+  }
+
+  class Container extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = { isMusicPlaying: true };
+    }
+
+    handleClick(event) {
+      if (this.state.isMusicPlaying) {
+        this.setState({ isMusicPlaying: false });
+      }else {
+        this.setState({ isMusicPlaying: true });
+      }
+    };
+
+    render() {
+      return (
+        <div>
+          <PlayButton 
+            onClick={this.handleClick.bind(this)}  
+            isMusicPlaying={this.state.isMusicPlaying} 
+          />
+        </div>
+      );
+    }
+  }
+
+  const placeWeWantToPutComponent = document.getElementById('hook');
+  // ReactDOM.render(OurFirstComponent(), placeWeWantToPutComponent);
+
+  // This is the JSX style
+  ReactDOM.render(<Container />, placeWeWantToPutComponent);
 </script>
